@@ -1,42 +1,47 @@
-module Arithmetic
 
-// Қосу функциясы
-let add a b =
-    if a < 0.0 || b < 0.0 then
-        Error "Теріс сан енгізуге болмайды!"
-    else
-        Ok (a + b)
+function add(a, b) {
+    if (!Number.isFinite(a) || !Number.isFinite(b)) {
+        return "Қате: екі сан енгізу керек.";
+    } else {
+        return a + b;
+    }
+}
 
-// Азайту функциясы
-let subtract a b =
-    if a < 0.0 || b < 0.0 then
-        Error "Теріс сан енгізуге болмайды!"
-    else
-        Ok (a - b)
+function subtract(a, b) {
+    if (!Number.isFinite(a) || !Number.isFinite(b)) {
+        return "Қате: екі сан енгізу керек.";
+    } else {
+        return a - b;
+    }
+}
 
-// Көбейту функциясы
-let multiply a b =
-    if a < 0.0 || b < 0.0 then
-        Error "Теріс сан енгізуге болмайды!"
-    else
-        Ok (a * b)
+function multiply(a, b) {
+    if (!Number.isFinite(a) || !Number.isFinite(b)) {
+        return "Қате: екі сан енгізу керек.";
+    } else {
+        return a * b;
+    }
+}
 
-// Бөлу функциясы
-let divide a b =
-    if a < 0.0 || b < 0.0 then
-        Error "Теріс сан енгізуге болмайды!"
-    elif b = 0.0 then
-        Error "Нөлге бөлуге болмайды!"
-    else
-        Ok (a / b)
+function divide(a, b) {
+    if (!Number.isFinite(a) || !Number.isFinite(b)) {
+        return "Қате: екі сан енгізу керек.";
+    } else if (b === 0) {
+        return "Қате: нөлге бөлуге болмайды.";
+    } else {
+        return a / b;
+    }
+}
 
-// Массивті тексеру функциясы
-let validateArray (values: obj array) =
-    values
-    |> Array.forall (fun value ->
-        match value with
-        | null -> false
-        | :? string -> false
-        | :? float as number -> number >= 0.0 && not (System.Double.IsNaN(number) || System.Double.IsInfinity(number))
-        | :? int as number -> number >= 0
-        | _ -> false)
+console.log("Қосу:", add(10, 5));
+console.log("Қосуды тексеру:", add("а", 5));
+
+console.log("Азайту:", subtract(10, 5));
+console.log("Азайтуды тексеру:", subtract(10, "б"));
+
+console.log("Көбейту:", multiply(10, 5));
+console.log("Көбейтуді тексеру:", multiply("в", 5));
+
+console.log("Бөлу:", divide(10, 5));
+console.log("Бөлуді тексеру:", divide(10, "г"));
+console.log("Нөлге бөлуді тексеру:", divide(10, 0));
